@@ -170,7 +170,11 @@ export default function CreateTaskForm(props: Props) {
               (なし)
             </option>
             {users.map((user) => {
-              return <option value={user.id}>{user.username}</option>;
+              return (
+                <option key={user.id} value={user.id}>
+                  {user.username}
+                </option>
+              );
             })}
           </select>
         </div>

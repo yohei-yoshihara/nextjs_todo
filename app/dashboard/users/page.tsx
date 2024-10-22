@@ -12,7 +12,7 @@ export default async function UsersPage() {
         <ul>
           {users.map((user) => {
             return (
-              <li>
+              <li key={user.id}>
                 <h2 className="text-gray-500 font-bold text-xl">
                   {user.username}
                 </h2>

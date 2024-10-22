@@ -184,7 +184,10 @@ export default function EditTaskForm(props: Props) {
             </option>
             {users.map((user) => {
               return (
-                <option value={user.id} selected={task.userId === user.id}>
+                <option
+                  key={user.id}
+                  value={user.id}
+                  selected={task.userId === user.id}>
                   {user.username}
                 </option>
               );
