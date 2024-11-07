@@ -1,4 +1,4 @@
-# Next.JS 15 RC2 Todo
+# Next.JS 15 Todo
 
 [こちら](https://nextjs.org/learn)を参考にして作成してみた Todo アプリ。
 

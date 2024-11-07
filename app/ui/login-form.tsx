@@ -25,6 +25,7 @@ export default function LoginForm() {
             id="username"
             name="username"
             type="text"
+            defaultValue="user1"
           />
         </div>
       </div>
@@ -42,6 +43,7 @@ export default function LoginForm() {
             id="password"
             name="password"
             type="password"
+            defaultValue="password"
           />
         </div>
       </div>
