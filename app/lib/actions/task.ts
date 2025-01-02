@@ -7,6 +7,8 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getUser } from "../data";
+import dayjs from "dayjs";
+import ja from "dayjs/locale/ja";
 
 export type TaskState = {
   errors?: {
@@ -53,8 +55,12 @@ export async function createTask(
     };
   }
 
-  const { title, description, due_date, completed, userId } =
-    validatedFields.data;
+  const { title, description, completed, userId } = validatedFields.data;
+
+  dayjs.locale(ja);
+  const due_date = dayjs(new Date(validatedFields.data.due_date)).format(
+    "YYYY/MM/DD"
+  );
 
   try {
     const task = await db.task.create({
@@ -66,6 +72,7 @@ export async function createTask(
         userId: userId !== 0 ? userId : null,
       },
     });
+    console.log("task created, task = ", task);
   } catch (e) {
     console.error(e);
     return { message: "タスクの作成に失敗しました" };
@@ -110,8 +117,12 @@ export async function updateTask(
     };
   }
 
-  const { title, description, due_date, completed, userId } =
-    validatedFields.data;
+  const { title, description, completed, userId } = validatedFields.data;
+
+  dayjs.locale(ja);
+  const due_date = dayjs(new Date(validatedFields.data.due_date)).format(
+    "YYYY/MM/DD"
+  );
 
   try {
     const task = await db.task.update({

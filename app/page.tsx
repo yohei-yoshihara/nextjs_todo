@@ -1,7 +1,7 @@
 import LogoutButton from "@/app/ui/logout-button";
 import CreateTaskForm from "@/app/ui/task/create-task-form";
 import Link from "next/link";
-import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import { IoIosArrowDropright } from "react-icons/io";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Link href="/dashboard" className="">
         <div className="flex flex-row justify-center bg-blue-500 p-5 rounded-xl w-64 text-white">
           <span className="font-bold mr-2">ダッシュボードへ</span>
-          <ArrowRightCircleIcon className="w-6 h-6" />
+          <IoIosArrowDropright className="w-6 h-6" />
         </div>
       </Link>
     </div>

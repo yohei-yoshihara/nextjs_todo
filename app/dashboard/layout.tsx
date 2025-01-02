@@ -2,12 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  HomeIcon,
-  TicketIcon,
-  UsersIcon,
-  PowerIcon,
-} from "@heroicons/react/24/outline";
+import { IoHomeOutline } from "react-icons/io5";
+import { IoTicketOutline } from "react-icons/io5";
+import { HiOutlineUsers } from "react-icons/hi";
+import { IoPower } from "react-icons/io5";
 import { signOut } from "@/auth";
 
 export const metadata: Metadata = {
@@ -19,17 +17,17 @@ const menuList = [
   {
     title: "ダッシュボード",
     path: "/dashboard",
-    icon: HomeIcon,
+    icon: IoHomeOutline,
   },
   {
     title: "すべてのタスク",
     path: "/dashboard/tasks",
-    icon: TicketIcon,
+    icon: IoTicketOutline,
   },
   {
     title: "ユーザ別タスク",
     path: "/dashboard/users",
-    icon: UsersIcon,
+    icon: HiOutlineUsers,
   },
 ];
 
@@ -67,7 +65,7 @@ export default function RootLayout({
                   await signOut({ redirectTo: "/" });
                 }}>
                 <button className="flex flex-row items-center md:ml-5">
-                  <PowerIcon className="w-5 h-5 text-gray-500 mr-4" />
+                  <IoPower className="w-5 h-5 text-gray-500 mr-4" />
                   <div className="text-gray-500 font-bold">ログアウト</div>
                 </button>
               </form>

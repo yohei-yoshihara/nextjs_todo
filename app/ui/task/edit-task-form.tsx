@@ -2,12 +2,11 @@
 
 import { useState, useActionState } from "react";
 import { updateTask, TaskState } from "@/app/lib/actions/task";
-import { Task, User } from "@prisma/client";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { ja } from "date-fns/locale/ja";
+import { Task } from "@prisma/client";
 import dayjs from "dayjs";
-import DatePicker, { registerLocale } from "react-datepicker";
-import { getUsers, UserWithTask } from "@/app/lib/data";
+import { UserWithTask } from "@/app/lib/data";
+import DatePicker from "@/app/ui/date-picker/date-picker";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 type Props = {
   task: Task;
@@ -29,7 +28,6 @@ export default function EditTaskForm(props: Props) {
   const currentDueDate = dayjs(task.due_date, dateFormat);
 
   // date picker
-  registerLocale("ja", ja);
   const [dueDate, setStartDate] = useState<Date | null>(
     currentDueDate.toDate()
   );
@@ -111,11 +109,6 @@ export default function EditTaskForm(props: Props) {
         </div>
         <div className="w-2/3">
           <DatePicker
-            showIcon
-            locale="ja"
-            dateFormat="yyyy/MM/dd"
-            minDate={currentDueDate.toDate()}
-            selected={dueDate}
             onChange={(date) => {
               setStartDate(date);
             }}
@@ -225,7 +218,7 @@ export default function EditTaskForm(props: Props) {
             className="w-2/3 flex h-8 items-end space-x-1 mt-2"
             aria-live="polite"
             aria-atomic="true">
-            <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+            <AiOutlineExclamationCircle className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{errorMessage.message}</p>
           </div>
         </div>

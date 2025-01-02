@@ -2,12 +2,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import "./globals.css";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  HomeIcon,
-  TicketIcon,
-  UsersIcon,
-  PowerIcon,
-} from "@heroicons/react/24/outline";
+
+import { IoHomeOutline } from "react-icons/io5";
+import { IoTicketOutline } from "react-icons/io5";
+import { HiOutlineUsers } from "react-icons/hi";
+import { IoPower } from "react-icons/io5";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,17 +17,17 @@ const menuList = [
   {
     title: "ダッシュボード",
     path: "/dashboard",
-    icon: HomeIcon,
+    icon: IoHomeOutline,
   },
   {
     title: "すべてのタスク",
     path: "/dashboard/tasks",
-    icon: TicketIcon,
+    icon: IoTicketOutline,
   },
   {
     title: "ユーザ別タスク",
     path: "/dashboard/users",
-    icon: UsersIcon,
+    icon: HiOutlineUsers,
   },
 ];
 

@@ -1,11 +1,11 @@
 "use client";
 import { useState, useActionState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
-import { ja } from "date-fns/locale/ja";
 import dayjs from "dayjs";
 import { createTask, TaskState } from "@/app/lib/actions/task";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { getUsers, UserWithTask } from "@/app/lib/data";
+import DatePicker from "@/app/ui/date-picker/date-picker";
+
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 const dateFormat = "YYYY/MM/DD";
 
@@ -22,8 +22,6 @@ export default function CreateTaskForm(props: Props) {
 
   const now = dayjs();
 
-  // date picker
-  registerLocale("ja", ja);
   const [dueDate, setStartDate] = useState<Date | null>(now.toDate());
 
   const users = props.users;
@@ -101,12 +99,6 @@ export default function CreateTaskForm(props: Props) {
         </div>
         <div className="w-2/3">
           <DatePicker
-            className="text-gray-500"
-            showIcon
-            locale="ja"
-            dateFormat="yyyy/MM/dd"
-            minDate={now.toDate()}
-            selected={dueDate}
             onChange={(date) => {
               setStartDate(date);
             }}
@@ -209,7 +201,7 @@ export default function CreateTaskForm(props: Props) {
             className="w-2/3 flex h-8 items-end space-x-1 mt-2"
             aria-live="polite"
             aria-atomic="true">
-            <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+            <AiOutlineExclamationCircle className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{errorMessage.message}</p>
           </div>
         </div>
