@@ -1,7 +1,7 @@
 import type { Task, User } from "@prisma/client";
 import type { TaskWithOptionalUser } from "@/app/lib/data";
 import Link from "next/link";
-import DeleteTaskButton from "./delete-task-button";
+import DeleteTaskButton from "@/app/ui/task/delete-task-button";
 
 import { IoTicketOutline } from "react-icons/io5";
 import { CiCircleCheck } from "react-icons/ci";
@@ -39,7 +39,7 @@ export default function TaskRow(props: Props) {
       <Link href={`/dashboard/tasks/${task.id}/edit`}>
         <CiEdit className="w-5 h-5 text-blue-400 mr-4" />
       </Link>
-      <DeleteTaskButton id={task.id} />
+      <DeleteTaskButton taskId={task.id} />
     </div>
   );
 }
