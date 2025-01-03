@@ -6,7 +6,7 @@ import db from "@/app/lib/db";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getUser } from "../data";
+import { getUserByUsername } from "../data";
 import dayjs from "dayjs";
 import ja from "dayjs/locale/ja";
 

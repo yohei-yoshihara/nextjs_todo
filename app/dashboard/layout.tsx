@@ -1,12 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import "react-datepicker/dist/react-datepicker.css";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoTicketOutline } from "react-icons/io5";
 import { HiOutlineUsers } from "react-icons/hi";
 import { IoPower } from "react-icons/io5";
-import { signOut } from "@/auth";
+import { logout } from "@/app/lib/actions/auth";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -62,7 +61,7 @@ export default function RootLayout({
               <form
                 action={async () => {
                   "use server";
-                  await signOut({ redirectTo: "/" });
+                  await logout();
                 }}>
                 <button className="flex flex-row items-center md:ml-5">
                   <IoPower className="w-5 h-5 text-gray-500 mr-4" />

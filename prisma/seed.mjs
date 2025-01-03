@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
+import dayjs from "dayjs";
 
 async function generateHash(password) {
   const salt = await bcrypt.genSalt();
@@ -13,35 +14,45 @@ async function main() {
   await db.task.deleteMany();
   await db.user.deleteMany();
 
+  let tasks = [];
+  for (let i = 0; i < 10; i++) {
+    tasks.push({
+      title: `Task ${i}`,
+      description: `This is Task ${i}`,
+      due_date: dayjs().add(i, "day").format("YYYY/MM/DD"),
+      completed: i % 2 == 0,
+    });
+  }
   await db.user.create({
     data: {
       username: "user1",
       password: await generateHash("password"),
+      role: "user",
       tasks: {
-        create: [
-          { title: 'Task1 - wnKBUgrijrRWdVEIlbMXlOXCTWDpFbQK', description: "This is Task1", due_date: "2024/12/20", completed: true },
-          { title: 'Task2 - woLMlmsDQRUWvILPFemZfKpiYq', description: "This is Task2", due_date: "2024/12/21", completed: true },
-          { title: 'Task3 - myhMXqzTjRJuLXOxaNLW', description: "This is Task3", due_date: "2024/12/22" },
-          { title: 'Task4 - lgyladWstTrVOCj', description: "This is Task3", due_date: "2024/12/23" },
-          { title: 'Task5 - ksDGlupVji', description: "This is Task3", due_date: "2024/12/24" },
-        ],
+        create: tasks,
       },
     },
-  })
+  });
 
+  tasks = [];
+  for (let i = 11; i < 15; i++) {
+    tasks.push({
+      title: `Task ${i}`,
+      description: `This is Task ${i}`,
+      due_date: dayjs().add(i, "day").format("YYYY/MM/DD"),
+      completed: i % 2 == 0,
+    });
+  }
   await db.user.create({
     data: {
       username: "user2",
       password: await generateHash("password"),
+      role: "admin",
       tasks: {
-        create: [
-          { title: 'Task6', description: "This is Task4", due_date: "2024/12/23", completed: true },
-          { title: 'Task7', description: "This is Task5", due_date: "2024/12/24" },
-          { title: 'Task8', description: "This is Task5", due_date: "2024/12/24" },
-        ],
+        create: tasks,
       },
     },
-  })
+  });
 }
 
 main();

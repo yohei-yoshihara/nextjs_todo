@@ -19,7 +19,9 @@ export type UserWithTask = Prisma.UserGetPayload<{
 
 export type UserWithOptionalTask = Optional<UserWithTask, "tasks">;
 
-export async function getUser(username: string): Promise<User | null> {
+export async function getUserByUsername(
+  username: string
+): Promise<User | null> {
   const user = await db.user.findUnique({
     where: {
       username: username,
@@ -28,16 +30,28 @@ export async function getUser(username: string): Promise<User | null> {
   return user;
 }
 
+export async function getUserById(userId: number): Promise<User | null> {
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  return user;
+}
+
 export async function createUser(
   username: string,
-  password: string
-): Promise<void> {
-  await db.user.create({
+  password: string,
+  role: string
+): Promise<User> {
+  const user = await db.user.create({
     data: {
       username: username,
       password: await generateHashedPassword(password),
+      role: role,
     },
   });
+  return user;
 }
 
 export async function getUsers(): Promise<UserWithTask[]> {
@@ -59,7 +73,7 @@ export async function getTaskById(taskId: number): Promise<Task | null> {
 }
 
 export async function getTasksForUser(username: string): Promise<Task[]> {
-  const user = await getUser(username);
+  const user = await getUserByUsername(username);
   return await db.task.findMany({
     where: {
       userId: user?.id,

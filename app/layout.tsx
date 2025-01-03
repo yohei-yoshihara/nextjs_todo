@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import "./globals.css";
-import "react-datepicker/dist/react-datepicker.css";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { IoTicketOutline } from "react-icons/io5";

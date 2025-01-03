@@ -4,8 +4,6 @@
 
 import db from "@/app/lib/db";
 import { z } from "zod";
-import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
 import { generateHashedPassword } from "@/app/lib/utils";
 
 export type UserState = {
@@ -44,30 +42,12 @@ export async function createUser(
       data: {
         username,
         password: await generateHashedPassword(password),
+        role: "user",
       },
     });
     return {};
   } catch (e) {
     console.log(e);
     return { message: "ユーザーの作成に失敗しました" };
-  }
-}
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData
-) {
-  try {
-    await signIn("credentials", formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "誤ったユーザ名とパスワードの組み合わせです";
-        default:
-          return "ユーザー認証に失敗しました";
-      }
-    }
-    throw error;
   }
 }

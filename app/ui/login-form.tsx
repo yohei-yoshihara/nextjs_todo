@@ -1,17 +1,18 @@
 "use client";
 
 import { useActionState } from "react";
-import { authenticate } from "@/app/lib/actions/user";
+import { login } from "@/app/lib/actions/auth";
+import { LoginState } from "../lib/definitions";
+
+const initialState: LoginState = {};
 
 export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    authenticate,
-    undefined
-  );
+  const [state, formAction, isPending] = useActionState(login, initialState);
 
   return (
     <form className="w-full max-w-sm" action={formAction}>
-      <div className="md:flex md:items-center mb-6">
+      {/* Username */}
+      <div className="md:flex md:items-center">
         <div className="md:w-1/3">
           <label
             className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -29,7 +30,21 @@ export default function LoginForm() {
           />
         </div>
       </div>
-      <div className="md:flex md:items-center mb-6">
+      <div className="md:flex md:flex-row md:items-center mb-6">
+        <div className="w-1/3" />
+        <div className="w-2/3">
+          <ul className="space-y-2">
+            {state.errors?.username &&
+              state.errors.username.map((error: string) => (
+                <li className="text-sm text-red-500" key={error}>
+                  {error}
+                </li>
+              ))}
+          </ul>
+        </div>
+      </div>
+      {/* Password */}
+      <div className="md:flex md:items-center">
         <div className="md:w-1/3">
           <label
             className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -47,11 +62,21 @@ export default function LoginForm() {
           />
         </div>
       </div>
-      <div>
-        {errorMessage && (
-          <div className="text-red-500 mb-6">{errorMessage}</div>
-        )}
+      <div className="md:flex md:flex-row md:items-center mb-6">
+        <div className="w-1/3" />
+        <div className="w-2/3">
+          <ul className="space-y-2">
+            {state.errors?.password &&
+              state.errors.password.map((error: string) => (
+                <li className="text-sm text-red-500" key={error}>
+                  {error}
+                </li>
+              ))}
+          </ul>
+        </div>
       </div>
+
+      {/* Login Button */}
       <div className="md:flex md:items-center">
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
