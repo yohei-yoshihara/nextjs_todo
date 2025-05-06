@@ -3,18 +3,18 @@
 import db from "@/app/lib/db";
 import bcrypt from "bcryptjs";
 import { generateHashedPassword } from "@/app/lib/utils";
-import { Prisma, User, Task } from "@prisma/client";
+import { Prisma, User, Task } from "@/app/generated/prisma";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
 export type TaskWithUser = Prisma.TaskGetPayload<{
-  include: { user: true };
+  include: { user: true }
 }>;
 
 export type TaskWithOptionalUser = Optional<TaskWithUser, "user">;
 
 export type UserWithTask = Prisma.UserGetPayload<{
-  include: { tasks: true };
+  include: { tasks: true }
 }>;
 
 export type UserWithOptionalTask = Optional<UserWithTask, "tasks">;
@@ -24,17 +24,17 @@ export async function getUserByUsername(
 ): Promise<User | null> {
   const user = await db.user.findUnique({
     where: {
-      username: username,
-    },
+      username: username
+    }
   });
   return user;
 }
 
-export async function getUserById(userId: number): Promise<User | null> {
+export async function getUserById(userId: number) : Promise<User | null> {
   const user = await db.user.findUnique({
     where: {
       id: userId,
-    },
+    }
   });
   return user;
 }
@@ -48,8 +48,8 @@ export async function createUser(
     data: {
       username: username,
       password: await generateHashedPassword(password),
-      role: role,
-    },
+      role: role
+    }
   });
   return user;
 }
@@ -57,8 +57,8 @@ export async function createUser(
 export async function getUsers(): Promise<UserWithTask[]> {
   const users = await db.user.findMany({
     include: {
-      tasks: true,
-    },
+      tasks: true
+    }
   });
   return users;
 }
@@ -66,8 +66,8 @@ export async function getUsers(): Promise<UserWithTask[]> {
 export async function getTaskById(taskId: number): Promise<Task | null> {
   const task = await db.task.findUnique({
     where: {
-      id: taskId,
-    },
+      id: taskId
+    }
   });
   return task;
 }

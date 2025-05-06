@@ -2,7 +2,7 @@
 
 import { useState, useActionState } from "react";
 import { updateTask, TaskState } from "@/app/lib/actions/task";
-import { Task } from "@prisma/client";
+import { Task } from "@/app/generated/prisma";
 import dayjs from "dayjs";
 import { UserWithTask } from "@/app/lib/data";
 import DatePicker from "@/app/ui/date-picker/date-picker";
@@ -37,13 +37,15 @@ export default function EditTaskForm(props: Props) {
   return (
     <form
       className="w-full max-w-lg border border-gray-300 shadow rounded-xl m-3 p-3"
-      action={formAction}>
+      action={formAction}
+    >
       {/* title */}
       <div className="flex items-center mb-1">
         <div className="w-1/3">
           <label
             className="block text-gray-500 font-bold text-right mr-3"
-            htmlFor="title">
+            htmlFor="title"
+          >
             タイトル
           </label>
         </div>
@@ -53,7 +55,8 @@ export default function EditTaskForm(props: Props) {
             type="text"
             name="title"
             id="title"
-            defaultValue={task.title}></input>
+            defaultValue={task.title}
+          ></input>
         </div>
       </div>
       <div className="flex mb-4">
@@ -73,7 +76,8 @@ export default function EditTaskForm(props: Props) {
         <div className="w-1/3">
           <label
             className="block text-gray-500 font-bold text-right mr-3 "
-            htmlFor="description">
+            htmlFor="description"
+          >
             説明
           </label>
         </div>
@@ -83,7 +87,8 @@ export default function EditTaskForm(props: Props) {
             className="block w-full appearance-none border-2 bg-gray-200 rounded focus:outline-none focus:border-gray-500 px-4 py-2"
             name="description"
             id="description"
-            defaultValue={task.description}></textarea>
+            defaultValue={task.description}
+          ></textarea>
         </div>
       </div>
       <div className="flex mb-4">
@@ -103,7 +108,8 @@ export default function EditTaskForm(props: Props) {
         <div className="w-1/3">
           <label
             className="block text-gray-500 font-bold text-right mr-3"
-            htmlFor="due_date">
+            htmlFor="due_date"
+          >
             期限日
           </label>
         </div>
@@ -133,7 +139,8 @@ export default function EditTaskForm(props: Props) {
         <div className="w-1/3">
           <label
             className="block text-gray-500 font-bold text-right mr-3"
-            htmlFor="completed">
+            htmlFor="completed"
+          >
             完了
           </label>
         </div>
@@ -143,7 +150,8 @@ export default function EditTaskForm(props: Props) {
             id="completed"
             name="completed"
             value="yes"
-            defaultChecked={task.completed}></input>
+            defaultChecked={task.completed}
+          ></input>
         </div>
       </div>
       <div className="flex mb-4">
@@ -163,24 +171,23 @@ export default function EditTaskForm(props: Props) {
         <div className="w-1/3">
           <label
             className="block text-gray-500 font-bold text-right mr-3"
-            htmlFor="completed">
+            htmlFor="completed"
+          >
             担当者
           </label>
         </div>
         <div className="w-2/3">
-          <select className="w-full text-gray-500" name="userId">
-            <option
-              value="0"
-              className=""
-              selected={!task.userId ? true : false}>
+          <select
+            className="w-full text-gray-500"
+            name="userId"
+            defaultValue={!task.userId ? 0 : task.userId}
+          >
+            <option key="0" value="0">
               (なし)
             </option>
             {users.map((user) => {
               return (
-                <option
-                  key={user.id}
-                  value={user.id}
-                  selected={task.userId === user.id}>
+                <option key={user.id} value={user.id}>
                   {user.username}
                 </option>
               );
@@ -205,7 +212,8 @@ export default function EditTaskForm(props: Props) {
         <div className="w-2/3">
           <button
             className=" text-white font-bold bg-blue-500 hover:bg-blue-400 rounded-xl p-2"
-            type="submit">
+            type="submit"
+          >
             タスクの更新
           </button>
         </div>
@@ -217,7 +225,8 @@ export default function EditTaskForm(props: Props) {
           <div
             className="w-2/3 flex h-8 items-end space-x-1 mt-2"
             aria-live="polite"
-            aria-atomic="true">
+            aria-atomic="true"
+          >
             <AiOutlineExclamationCircle className="h-5 w-5 text-red-500" />
             <p className="text-sm text-red-500">{errorMessage.message}</p>
           </div>

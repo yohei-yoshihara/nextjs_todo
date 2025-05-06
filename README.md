@@ -7,10 +7,10 @@
 ## 起動手順
 
 ```
-npm install --legacy-peer-deps
+pnpm install
 npx auth secret
 npx prisma generate
 npx prisma db push
 node prisma/seed.mjs
-npm run dev
+pnpm run dev
 ```

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../app/generated/prisma/index.js";
 import bcrypt from "bcryptjs";
 import dayjs from "dayjs";
 
@@ -11,6 +11,7 @@ async function generateHash(password) {
 const db = new PrismaClient();
 
 async function main() {
+  console.log("start seeding")
   await db.task.deleteMany();
   await db.user.deleteMany();
 
@@ -20,7 +21,7 @@ async function main() {
       title: `Task ${i}`,
       description: `This is Task ${i}`,
       due_date: dayjs().add(i, "day").format("YYYY/MM/DD"),
-      completed: i % 2 == 0,
+      completed: Math.floor(Math.random() * 3) == 0,
     });
   }
   await db.user.create({
@@ -40,7 +41,7 @@ async function main() {
       title: `Task ${i}`,
       description: `This is Task ${i}`,
       due_date: dayjs().add(i, "day").format("YYYY/MM/DD"),
-      completed: i % 2 == 0,
+      completed: Math.floor(Math.random() * 3) == 0,
     });
   }
   await db.user.create({
@@ -53,6 +54,7 @@ async function main() {
       },
     },
   });
+  console.log("done");
 }
 
 main();

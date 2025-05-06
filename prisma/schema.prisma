@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -14,19 +15,19 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id Int @id @default(autoincrement())
   username String @unique
   password String
-  role     String
-  tasks    Task[]
+  role String
+  tasks Task[]
 }
 
 model Task {
-  id          Int     @id @default(autoincrement())
-  title       String
+  id Int @id @default(autoincrement())
+  title String
   description String
-  due_date    String
-  completed   Boolean @default(false)
-  user        User?   @relation(fields: [userId], references: [id])
-  userId      Int?
+  due_date String
+  completed Boolean @default(false)
+  user User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
