@@ -66,7 +66,7 @@ export default function DeleteTaskButton({ taskId }: Props) {
         onCloseWithButton={onYesButton}
         closeButton={noButton}
         onClose={onNoButton}
-        className="p-3 bg-zinc-600 rounded-xl shadow-xl">
+        className="m-auto p-3 bg-zinc-600 rounded-xl shadow-xl">
         <h1 className="text-lg font-bold text-gray-400">Delete Task</h1>
         <div className="mb-3 text-gray-300">
           Are you sure to delete this task?

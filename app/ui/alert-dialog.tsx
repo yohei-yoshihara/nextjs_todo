@@ -20,7 +20,7 @@ export function AlertDialog({
   onClose,
   children,
   closeButton = <div className="bg-blue-500 text-white">Close</div>,
-  className = "bg-zinc-700 text-white",
+  className = "bg-zinc-700 text-white m-auto",
   closeWithEscape = false,
   buttons,
   onCloseWithButton,
