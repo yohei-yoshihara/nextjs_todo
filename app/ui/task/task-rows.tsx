@@ -1,6 +1,6 @@
 import { Prisma, Task } from "@prisma/client";
 import TaskRow from "@/app/ui/task/task-row";
-import type { TaskWithOptionalUser } from "@/app/lib/data";
+import type { TaskWithOptionalUser } from "@/lib/data";
 
 type Props = {
   tasks: TaskWithOptionalUser[];

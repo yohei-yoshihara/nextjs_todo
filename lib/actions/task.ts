@@ -2,7 +2,7 @@
 
 // タスクのためのサーバーアクション
 
-import db from "@/app/lib/db";
+import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -63,7 +63,7 @@ export async function createTask(
   );
 
   try {
-    const task = await db.task.create({
+    const task = await prisma.task.create({
       data: {
         title,
         description,
@@ -125,7 +125,7 @@ export async function updateTask(
   );
 
   try {
-    const task = await db.task.update({
+    const task = await prisma.task.update({
       where: {
         id,
       },
@@ -150,7 +150,7 @@ export async function updateTask(
 export async function deleteTask(id: number) {
   console.log("deleteTask id=", id);
   try {
-    await db.task.delete({
+    await prisma.task.delete({
       where: {
         id,
       },

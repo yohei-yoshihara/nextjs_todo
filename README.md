@@ -1,4 +1,4 @@
-# Next.JS 15 Todo
+# Next.JS 16 + Prisma 7 Todo
 
 [こちら](https://nextjs.org/learn)を参考にして作成してみた Todo アプリ。
 
@@ -6,11 +6,28 @@
 
 ## 起動手順
 
-```
+``` bash
+cd nextjs_todo
 pnpm install
-npx auth secret
-npx prisma generate
-npx prisma db push
-node prisma/seed.mjs
+pnpm dlx auth secret
+pnpm dlx prisma generate
+pnpm dlx prisma db push
+pnpm dlx tsx seed.ts
 pnpm run dev
+```
+
+## 新規 Next.js 16 + Prisma 7 アプリの作成手順
+
+``` bash
+pnpm create next-app@latest nextjs16_todo --yes
+cd nextjs16_todo
+pnpm add prisma @types/node @types/better-sqlite3 -D
+pnpm add @prisma/client @prisma/adapter-better-sqlite3 dotenv
+pnpm pkg set "pnpm.onlyBuiltDependencies[]=better-sqlite3"
+pnpm install
+pnpm add jose zod react-icons bcryptjs dayjs 
+
+pnpm dlx prisma init --datasource-provider sqlite --output ../generated/prisma
+pnpm dlx prisma migrate dev --name init
+pnpm dlx prisma generate
 ```

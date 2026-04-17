@@ -1,10 +1,11 @@
 "use server";
 
 import bcrypt from "bcryptjs";
-import { createSession, deleteSession } from "@/app/lib/session";
+import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
-import { getUserByUsername, createUser } from "@/app/lib/data";
+import { getUserByUsername, createUser } from "@/lib/data";
 import { LoginFormSchema, LoginState, SignupFormSchema } from "../definitions";
+import { cookies } from 'next/headers'
 
 export async function login(
   prevState: LoginState,
@@ -96,6 +97,6 @@ export async function signup(state: LoginState, formData: FormData) {
 }
 
 export async function logout() {
-  deleteSession();
+  (await cookies()).delete("session");
   redirect("/");
 }

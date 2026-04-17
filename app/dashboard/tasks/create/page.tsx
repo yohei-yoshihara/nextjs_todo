@@ -1,4 +1,4 @@
-import { getUsers } from "@/app/lib/data";
+import { getUsers } from "@/lib/data";
 import CreateTaskForm from "@/app/ui/task/create-task-form";
 import Title from "@/app/ui/title";
 

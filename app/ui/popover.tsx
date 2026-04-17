@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, ReactNode } from "react";
-import { useOutsideClick } from "@/app/lib/use-outside-click";
+import { useOutsideClick } from "@/lib/use-outside-click";
 
 type Props = {
   children: ReactNode;

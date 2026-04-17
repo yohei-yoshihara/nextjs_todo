@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useActionState } from "react";
-import { updateTask, TaskState } from "@/app/lib/actions/task";
+import { updateTask, TaskState } from "@/lib/actions/task";
 import { Task } from "@/app/generated/prisma";
 import dayjs from "dayjs";
-import { UserWithTask } from "@/app/lib/data";
+import { UserWithTask } from "@/lib/data";
 import DatePicker from "@/app/ui/date-picker/date-picker";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 

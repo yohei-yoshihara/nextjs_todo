@@ -1,7 +1,7 @@
 import EditTaskForm from "@/app/ui/task/edit-task-form";
 import { Metadata } from "next";
 import Title from "@/app/ui/title";
-import { getUsers, getTaskById } from "@/app/lib/data";
+import { getUsers, getTaskById } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Edit Task",

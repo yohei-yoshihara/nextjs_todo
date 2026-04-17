@@ -5,7 +5,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { IoTicketOutline } from "react-icons/io5";
 import { HiOutlineUsers } from "react-icons/hi";
 import { IoPower } from "react-icons/io5";
-import { logout } from "@/app/lib/actions/auth";
+import { logout } from "@/lib/actions/auth";
 import { ToastContainer } from "@/app/ui/toast";
 
 export const metadata: Metadata = {

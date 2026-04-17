@@ -1,19 +1,17 @@
-import { PrismaClient } from "../app/generated/prisma/index.js";
+import { prisma } from "./lib/prisma";
 import bcrypt from "bcryptjs";
 import dayjs from "dayjs";
 
-async function generateHash(password) {
+async function generateHash(password: string) {
   const salt = await bcrypt.genSalt();
   const hashed = await bcrypt.hash(password, salt);
   return hashed;
 }
 
-const db = new PrismaClient();
-
 async function main() {
   console.log("start seeding")
-  await db.task.deleteMany();
-  await db.user.deleteMany();
+  await prisma.user.deleteMany();
+  await prisma.task.deleteMany();
 
   let tasks = [];
   for (let i = 0; i < 10; i++) {
@@ -24,7 +22,7 @@ async function main() {
       completed: Math.floor(Math.random() * 3) == 0,
     });
   }
-  await db.user.create({
+  await prisma.user.create({
     data: {
       username: "user1",
       password: await generateHash("password"),
@@ -44,7 +42,7 @@ async function main() {
       completed: Math.floor(Math.random() * 3) == 0,
     });
   }
-  await db.user.create({
+  await prisma.user.create({
     data: {
       username: "user2",
       password: await generateHash("password"),

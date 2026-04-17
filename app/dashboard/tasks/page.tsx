@@ -1,4 +1,4 @@
-import { getTasks } from "@/app/lib/data";
+import { getTasks } from "@/lib/data";
 import CreateTaskButton from "@/app/ui/task/create-task-button";
 import TaskRow from "@/app/ui/task/task-row";
 import Title from "@/app/ui/title";

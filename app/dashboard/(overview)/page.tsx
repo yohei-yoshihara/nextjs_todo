@@ -1,9 +1,9 @@
 import LogoutButton from "@/app/ui/logout-button";
-import { getTasksForUser } from "@/app/lib/data";
+import { getTasksForUser } from "@/lib/data";
 import TaskRow from "@/app/ui/task/task-row";
 import Title from "@/app/ui/title";
 import CreateTaskButton from "@/app/ui/task/create-task-button";
-import { getUserFromSession } from "@/app/lib/session";
+import { getUserFromSession } from "@/lib/session";
 
 export default async function DashboardPage() {
   const user = await getUserFromSession();

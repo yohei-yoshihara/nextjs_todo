@@ -2,9 +2,9 @@
 
 // Server actions for User
 
-import db from "@/app/lib/db";
+import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import { generateHashedPassword } from "@/app/lib/utils";
+import { generateHashedPassword } from "@/lib/utils";
 
 export type UserState = {
   errors?: {
@@ -38,7 +38,7 @@ export async function createUser(
   const { username, password } = validatedFields.data;
 
   try {
-    const user = await db.user.create({
+    const user = await prisma.user.create({
       data: {
         username,
         password: await generateHashedPassword(password),

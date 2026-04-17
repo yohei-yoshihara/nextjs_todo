@@ -1,5 +1,5 @@
 import type { Task, User } from "@prisma/client";
-import type { TaskWithOptionalUser } from "@/app/lib/data";
+import type { TaskWithOptionalUser } from "@/lib/data";
 import Link from "next/link";
 import DeleteTaskButton from "@/app/ui/task/delete-task-button";
 

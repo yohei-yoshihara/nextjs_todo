@@ -1,8 +1,8 @@
 "use server";
 
-import db from "@/app/lib/db";
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { generateHashedPassword } from "@/app/lib/utils";
+import { generateHashedPassword } from "@/lib/utils";
 import { Prisma, User, Task } from "@/app/generated/prisma";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
@@ -22,7 +22,7 @@ export type UserWithOptionalTask = Optional<UserWithTask, "tasks">;
 export async function getUserByUsername(
   username: string
 ): Promise<User | null> {
-  const user = await db.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       username: username
     }
@@ -31,7 +31,7 @@ export async function getUserByUsername(
 }
 
 export async function getUserById(userId: number) : Promise<User | null> {
-  const user = await db.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     }
@@ -44,7 +44,7 @@ export async function createUser(
   password: string,
   role: string
 ): Promise<User> {
-  const user = await db.user.create({
+  const user = await prisma.user.create({
     data: {
       username: username,
       password: await generateHashedPassword(password),
@@ -55,7 +55,7 @@ export async function createUser(
 }
 
 export async function getUsers(): Promise<UserWithTask[]> {
-  const users = await db.user.findMany({
+  const users = await prisma.user.findMany({
     include: {
       tasks: true
     }
@@ -64,7 +64,7 @@ export async function getUsers(): Promise<UserWithTask[]> {
 }
 
 export async function getTaskById(taskId: number): Promise<Task | null> {
-  const task = await db.task.findUnique({
+  const task = await prisma.task.findUnique({
     where: {
       id: taskId
     }
@@ -74,7 +74,7 @@ export async function getTaskById(taskId: number): Promise<Task | null> {
 
 export async function getTasksForUser(username: string): Promise<Task[]> {
   const user = await getUserByUsername(username);
-  return await db.task.findMany({
+  return await prisma.task.findMany({
     where: {
       userId: user?.id,
     },
@@ -82,7 +82,7 @@ export async function getTasksForUser(username: string): Promise<Task[]> {
 }
 
 export async function getTasks(): Promise<TaskWithUser[]> {
-  const tasks = await db.task.findMany({
+  const tasks = await prisma.task.findMany({
     include: {
       user: true,
     },
