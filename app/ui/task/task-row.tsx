@@ -15,28 +15,28 @@ export default function TaskRow(props: Props) {
   const task = props.task;
   return (
     <div className="flex flex-row items-center">
-      <Link href={`/dashboard/tasks/${task.id}/edit`}>
+      <Link aria-label="タスクの編集" href={`/dashboard/tasks/${task.id}/edit`}>
         <IoTicketOutline className="w-5 h-5 mr-4 text-gray-500" />
       </Link>
       <div className="w-72 mr-4">
-        <p className="text-gray-500 font-bold truncate">{task.title}</p>
+        <p aria-label="タスクのタイトル" className="text-gray-500 font-bold truncate">{task.title}</p>
       </div>
       <div className="w-24 mr-4">
-        <p className="text-gray-500">{task.due_date}</p>
+        <p aria-label="タスクの期日" className="text-gray-500">{task.due_date}</p>
       </div>
       {task.user ? (
         <div className="w-16 mr-4">
-          <p className="text-gray-500 truncate">{task.user.username}</p>
+          <p aria-label="アサインされたユーザ" className="text-gray-500 truncate">{task.user.username}</p>
         </div>
       ) : (
-        <div className="w-16 mr-4" />
+        <div aria-label="特定のユーザにアサインされていない" className="w-16 mr-4" />
       )}
       {task.completed ? (
-        <CiCircleCheck className="w-5 h-5 text-green-500 mr-4" />
+        <CiCircleCheck aria-label="完了したタスク" className="w-5 h-5 text-green-500 mr-4" />
       ) : (
-        <div className="w-5 mr-4" />
+        <div aria-label="未完了のタスク" className="w-5 mr-4" />
       )}
-      <Link href={`/dashboard/tasks/${task.id}/edit`}>
+      <Link aria-label="タスクの編集" href={`/dashboard/tasks/${task.id}/edit`}>
         <CiEdit className="w-5 h-5 text-blue-400 mr-4" />
       </Link>
       <DeleteTaskButton taskId={task.id} />

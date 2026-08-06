@@ -40,7 +40,7 @@ export async function login(
     return { message: "login error" };
   }
 
-  if (!bcrypt.compare(userData.password, user.password)) {
+  if (!await bcrypt.compare(userData.password, user.password)) {
     console.log("failed to login, incorrect password");
     return { message: "login error" };
   }

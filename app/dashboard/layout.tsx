@@ -65,7 +65,7 @@ export default function RootLayout({
                 await logout();
               }}
             >
-              <button className="flex flex-row items-center md:ml-5">
+              <button id="logout" className="flex flex-row items-center md:ml-5">
                 <IoPower className="w-5 h-5 text-gray-500 mr-4" />
                 <div className="text-gray-500 font-bold">ログアウト</div>
               </button>

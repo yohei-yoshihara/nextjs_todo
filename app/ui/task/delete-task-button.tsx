@@ -57,7 +57,7 @@ export default function DeleteTaskButton({ taskId }: Props) {
 
   return (
     <div>
-      <button onClick={() => setIsOpen(true)} disabled={isPending}>
+      <button aria-label="タスクの削除" onClick={() => setIsOpen(true)} disabled={isPending}>
         <MdDelete className="text-red-400" />
       </button>
       <AlertDialog
